@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استراتيجية Fishbowl</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>
+        <img src="fish-logo-removebg-preview (1).png" alt="Logo" class="header-logo">
+        <span>استراتيجية Fishbowl</span>
+    </h1>
+    <p>نتعلم بالحوار والملاحظة وتبادل الأدوار</p>
+</header>
+
+<main>
+
+<section id="home" class="page active">
+    <div class="fish">
+        <img src="fish-logo-removebg-preview (1).png" alt="Logo" class="main-logo">
+    </div>
+    <h2>مرحباً بكم في استراتيجية Fishbowl</h2>
+    <p>رحلة تعليمية تفاعلية لفهم استراتيجية حوض السمك.</p>
+    <button onclick="showPage('case')">ابدأ التجربة</button>
+</section>
+
+<section id="case" class="page">
+    <h2>📌 عرض القضية</h2>
+    <div class="card">
+        هل استخدام الذكاء الاصطناعي في أداء الواجبات المدرسية
+        يساعد الطالب على التعلم، أم قد يقلل من اعتماده على نفسه؟
+    </div>
+    <p>اختر الدور الذي تشارك به في المناقشة:</p>
+    <div class="buttons">
+        <button onclick="chooseRole('discussion')">💬 أنا مناقش</button>
+        <button onclick="chooseRole('observation')">👀 أنا مراقب</button>
+    </div>
+    <p id="roleMessage"></p>
+    <button onclick="showRound(1)">عرض الجولة الأولى</button>
+</section>
+
+<section id="round1" class="page">
+    <h2>🐠 الجولة الأولى</h2>
+    <div class="roles">
+        <div class="card discussion">
+            <h3>💬 مجموعة المناقشة</h3>
+            <ul>
+                <li>عرض الرأي بوضوح.</li>
+                <li>تقديم الحجج والأدلة.</li>
+                <li>الاستماع لآراء الآخرين.</li>
+                <li>احترام وجهات النظر المختلفة.</li>
+                <li>تبادل الأفكار للوصول إلى نتائج.</li>
+            </ul>
+        </div>
+        <div class="card observation">
+            <h3>👀 مجموعة المراقبة</h3>
+            <ul>
+                <li>ملاحظة طريقة الحوار.</li>
+                <li>تسجيل الأفكار المهمة.</li>
+                <li>متابعة مشاركة جميع الأعضاء.</li>
+                <li>ملاحظة قوة الحجج والأدلة.</li>
+                <li>تقديم تغذية راجعة بناءة.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- خانات كتابة المشاركات للجولة الأولى -->
+    <div class="card" style="text-align: right; margin-top: 20px;">
+        <h3>✍️ كتابة المشاركات (الجولة الأولى)</h3>
+        <div style="margin-bottom: 15px;">
+            <label>💬 آراء المناقشة:</label>
+            <input type="text" id="inputDiscussion1" placeholder="اكتب رأيك أو حجتك هنا..." style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #ccc;">
+            <button onclick="addParticipation(1, 'discussion')" style="margin-top: 8px; padding: 8px 15px; font-size: 14px;">إرسال رأي المناقشة</button>
+        </div>
+        <div>
+            <label>👀 ملاحظات المراقبة:</label>
+            <input type="text" id="inputObservation1" placeholder="اكتب ملاحظتك هنا..." style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #ccc;">
+            <button onclick="addParticipation(1, 'observation')" style="margin-top: 8px; padding: 8px 15px; font-size: 14px;">إرسال ملاحظة المراقبة</button>
+        </div>
+    </div>
+
+    <!-- عرض المشاركات المجمعة للجولة الأولى -->
+    <div class="card" style="text-align: right;">
+        <h3>📋 عرض المشاركات المجمعة (الجولة الأولى)</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+            <div style="background: #E4F0FF; padding: 15px; border-radius: 10px;">
+                <h4 style="color: #246BCE; margin-top: 0;">المناقشة</h4>
+                <ul id="listDiscussion1" style="padding-right: 20px; margin: 0;"><li>كل آراء المناقشين تظهر هنا.</li></ul>
+            </div>
+            <div style="background: #E4F7F2; padding: 15px; border-radius: 10px;">
+                <h4 style="color: #36A99A; margin-top: 0;">المراقبة</h4>
+                <ul id="listObservation1" style="padding-right: 20px; margin: 0;"><li>كل ملاحظات المراقبين تظهر هنا.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="showPage('exchange')">الانتقال للجولة الثانية</button>
+</section>
+
+<section id="exchange" class="page">
+    <h2>🔄 الجولة الثانية</h2>
+    <div class="fish">🐟</div>
+    <h3>تبادل الأدوار</h3>
+    <p>في هذه الجولة يتم تبادل الأدوار بين المجموعتين.</p>
+    <div class="card">
+        <p>مجموعة المناقشة تصبح مجموعة المراقبة.</p>
+        <p>ومجموعة المراقبة تصبح مجموعة المناقشة.</p>
+    </div>
+    <p id="newRole"></p>
+    <button onclick="showRound(2)">ابدأ الجولة الثانية</button>
+</section>
+
+<section id="round2" class="page">
+    <h2>🐠 الجولة الثانية بعد تبادل الأدوار</h2>
+    <div class="roles">
+        <div class="card discussion">
+            <h3>💬 مجموعة المناقشة</h3>
+            <ul>
+                <li>طرح أفكار جديدة حول القضية.</li>
+                <li>تطوير الحجج السابقة.</li>
+                <li>الرد على الملاحظات.</li>
+                <li>تقديم أدلة تدعم الرأي.</li>
+                <li>الوصول إلى استنتاج مشترك.</li>
+            </ul>
+        </div>
+        <div class="card observation">
+            <h3>👀 مجموعة المراقبة</h3>
+            <ul>
+                <li>متابعة جودة المناقشة.</li>
+                <li>مقارنة الأداء بالجولة الأولى.</li>
+                <li>تحديد نقاط القوة والضعف.</li>
+                <li>ملاحظة تطور الحوار.</li>
+                <li>تقديم ملاحظات لتحسين الأداء.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- خانات كتابة المشاركات للجولة الثانية -->
+    <div class="card" style="text-align: right; margin-top: 20px;">
+        <h3>✍️ كتابة المشاركات (الجولة الثانية)</h3>
+        <div style="margin-bottom: 15px;">
+            <label>💬 آراء المناقشة (بعد التبادل):</label>
+            <input type="text" id="inputDiscussion2" placeholder="اكتب رأيك أو حجتك هنا..." style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #ccc;">
+            <button onclick="addParticipation(2, 'discussion')" style="margin-top: 8px; padding: 8px 15px; font-size: 14px;">إرسال رأي المناقشة</button>
+        </div>
+        <div>
+            <label>👀 ملاحظات المراقبة (بعد التبادل):</label>
+            <input type="text" id="inputObservation2" placeholder="اكتب ملاحظتك هنا..." style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #ccc;">
+            <button onclick="addParticipation(2, 'observation')" style="margin-top: 8px; padding: 8px 15px; font-size: 14px;">إرسال ملاحظة المراقبة</button>
+        </div>
+    </div>
+
+    <!-- عرض المشاركات المجمعة للجولة الثانية -->
+    <div class="card" style="text-align: right;">
+        <h3>📋 عرض المشاركات المجمعة (الجولة الثانية)</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+            <div style="background: #E4F0FF; padding: 15px; border-radius: 10px;">
+                <h4 style="color: #246BCE; margin-top: 0;">المناقشة</h4>
+                <ul id="listDiscussion2" style="padding-right: 20px; margin: 0;"><li>آراء المناقشين الجديدة تظهر هنا.</li></ul>
+            </div>
+            <div style="background: #E4F7F2; padding: 15px; border-radius: 10px;">
+                <h4 style="color: #36A99A; margin-top: 0;">المراقبة</h4>
+                <ul id="listObservation2" style="padding-right: 20px; margin: 0;"><li>ملاحظات المراقبين الجديدة تظهر هنا.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="showPage('solution')">عرض الحل النهائي</button>
+</section>
+
+<section id="solution" class="page">
+    <h2>💡 الحل النهائي للقضية</h2>
+    <div class="card">
+        <h3>القضية</h3>
+        هل استخدام الذكاء الاصطناعي في أداء الواجبات المدرسية يساعد الطالب على التعلم، أم قد يقلل من اعتماده على نفسه؟
+    </div>
+    <div class="card solution">
+        <h3>الحل والتوصيات</h3>
+        يمكن للذكاء الاصطناعي أن يساعد الطالب على التعلم
+        إذا استخدمه كأداة للمساعدة والفهم والبحث،
+        وليس بديلاً عن التفكير الشخصي وأداء الواجبات.
+        <ul>
+            <li>استخدام الذكاء الاصطناعي لفهم المعلومات.</li>
+            <li>عدم الاعتماد عليه في نسخ الإجابات.</li>
+            <li>التحقق من صحة المعلومات.</li>
+            <li>تنمية مهارات التفكير والإبداع.</li>
+        </ul>
+    </div>
+    <button onclick="startQuiz()">اختبر فهمك 🧠</button>
+</section>
+
+<section id="quiz" class="page">
+    <h2>🧠 اختبر فهمك للاستراتيجية</h2>
+    <p id="progress"></p>
+    <div class="card">
+        <h3 id="question"></h3>
+        <div id="answers"></div>
+        <div id="feedback"></div>
+    </div>
+    <button id="nextQuestion" onclick="nextQuestion()" hidden>السؤال التالي</button>
+</section>
+
+<section id="result" class="page">
+    <div class="fish">🏆</div>
+    <h2>انتهت رحلتنا التعليمية!</h2>
+    <h3 id="finalScore"></h3>
+    <p>شكراً لكم على حسن استماعكم ومشاركتكم.</p>
+    <p>نتمنى أن تكون الفكرة قد نالت إعجابكم ❤️</p>
+    <button onclick="showPage('home')">إعادة التجربة</button>
+</section>
+
+</main>
+
+<footer>
+    <p>استراتيجية حوض السمك | التعلم بالمشاركة والتفاعل 🐠</p>
+</footer>
+
+<script type="module" src="script.js"></script></body>
+</html>
