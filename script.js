@@ -199,6 +199,14 @@ let currentQuestion = 0;
 let score = 0;
 let answered = false;
 
+// دالة تشغيل الأصوات الخاصة بكل سؤال (صح / خطأ)
+function playSound(isCorrect, questionIndex) {
+    let qNum = questionIndex + 1;
+    let soundFileName = isCorrect ? `q${qNum}-correct.mpeg` : `q${qNum}-wrong.mpeg`;
+    let audio = new Audio(soundFileName);
+    audio.play().catch(e => console.log("الصوت يحتاج تفاعل مستخدم:", e));
+}
+
 window.startQuiz = function() {
     currentQuestion = 0;
     score = 0;
@@ -233,6 +241,9 @@ function checkAnswer(selected, selectedButton) {
     let q = questions[currentQuestion];
     let allButtons = document.querySelectorAll(".answer");
     allButtons.forEach(button => { button.disabled = true; });
+
+    // تشغيل الصوت التفاعلي للإجابة
+    playSound(selected === q.correct, currentQuestion);
 
     if (selected === q.correct) {
         score++;
