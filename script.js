@@ -4,13 +4,13 @@ import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstati
 
 // إعدادات الربط الخاصة بمشروعك على Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBqr0iIt4envmWuLJ6srR7nL56AiANc",
-  authDomain: "fishbowl-9785d.firebaseapp.com",
-  projectId: "fishbowl-9785d",
-  storageBucket: "fishbowl-9785d.firebasestorage.app",
-  messagingSenderId: "645453147595",
-  appId: "1:645453147595:web:d427Fcd5f1707e735d5a4e",
-  measurementId: "G-RQVP42JRRA4"
+    apiKey: "AIzaSyBqr0iIt4envmWuLJ6srR7nL56AiANc",
+    authDomain: "fishbowl-9785d.firebaseapp.com",
+    projectId: "fishbowl-9785d",
+    storageBucket: "fishbowl-9785d.firebasestorage.app",
+    messagingSenderId: "645453147595",
+    appId: "1:645453147595:web:d427Fcd5f1707e735d5a4e",
+    measurementId: "G-RQVP42JRRA4"
 };
 
 // تهيئة تطبيق فايربيس وقاعدة البيانات
@@ -69,7 +69,6 @@ window.addParticipation = async function(roundNum, type) {
     }
 
     try {
-        // حفظ المشاركة في قاعدة البيانات السحابية
         await addDoc(collection(db, "participations"), {
             round: roundNum,
             type: type, // 'discussion' أو 'observation'
@@ -123,7 +122,6 @@ function listenToParticipations() {
             }
         });
 
-        // رسائل افتراضية في حال عدم وجود مشاركات بعد
         if (!hasDisc1 && listDiscussion1) listDiscussion1.innerHTML = "<li>كل آراء المناقشين تظهر هنا.</li>";
         if (!hasObs1 && listObservation1) listObservation1.innerHTML = "<li>كل ملاحظات المراقبين تظهر هنا.</li>";
         if (!hasDisc2 && listDiscussion2) listDiscussion2.innerHTML = "<li>آراء المناقشين الجديدة تظهر هنا.</li>";
@@ -131,12 +129,11 @@ function listenToParticipations() {
     });
 }
 
-// تشغيل الاستماع للقاعدة فور فتح الصفحة
 window.addEventListener("DOMContentLoaded", () => {
     listenToParticipations();
 });
 
-// الأسئلة والاختبار التفاعلي
+// الأسئلة والاختبار التفاعلي مع مسارات الأصوات لكل سؤال
 const questions = [
     {
         question: "لماذا تُعد المراقبة في استراتيجية حوض السمك عنصراً أساسياً وليس مجرد مشاهدة صامتة؟",
@@ -147,7 +144,9 @@ const questions = [
             "لأنهم يحددون الإجابة الصحيحة فقط."
         ],
         correct: 1,
-        explanation: "المراقبة عملية تحليل وتقويم تساعد على تحسين التعلم."
+        explanation: "المراقبة عملية تحليل وتقويم تساعد على تحسين التعلم.",
+        correctSound: "q1-correct.mpeg",
+        wrongSound: "q1-wrong.mpeg"
     },
     {
         question: "ما الهدف التربوي الأهم من تبادل الأدوار بين المجموعتين في الجولة الثانية؟",
@@ -158,7 +157,9 @@ const questions = [
             "إلغاء دور المجموعة الخارجية."
         ],
         correct: 2,
-        explanation: "تبادل الأدوار ينمي مهارات الحوار والتفكير النقدي والتقويم لدى جميع الطلاب."
+        explanation: "تبادل الأدوار ينمي مهارات الحوار والتفكير النقدي والتقويم لدى جميع الطلاب.",
+        correctSound: "q2-correct.mpeg",
+        wrongSound: "q2-wrong.mpeg"
     },
     {
         question: "إذا احتكرت مجموعة المناقشة الحوار ولم تسمح لجميع أعضائها بالمشاركة، فما الإجراء التربوي الأنسب؟",
@@ -169,7 +170,9 @@ const questions = [
             "السماح لطالب واحد فقط باستكمال الحديث."
         ],
         correct: 1,
-        explanation: "من أهداف الاستراتيجية تحقيق التفاعل والمشاركة الفعالة بين الطلاب."
+        explanation: "من أهداف الاستراتيجية تحقيق التفاعل والمشاركة الفعالة بين الطلاب.",
+        correctSound: "q3-correct.mpeg",
+        wrongSound: "q3-wrong.mpeg"
     },
     {
         question: "كيف يمكن الاستفادة من ملاحظات المجموعة الخارجية عند بدء الجولة الثانية؟",
@@ -180,7 +183,9 @@ const questions = [
             "استخدامها لمنع الطلاب من الاختلاف."
         ],
         correct: 1,
-        explanation: "الملاحظات والتغذية الراجعة تساعد على تطوير الأداء في الجولة التالية."
+        explanation: "الملاحظات والتغذية الراجعة تساعد على تطوير الأداء في الجولة التالية.",
+        correctSound: "q4-correct.mpeg",
+        wrongSound: "q4-wrong.mpeg"
     },
     {
         question: "أي المواقف التالية يدل على نجاح المعلم في توظيف استراتيجية حوض السمك؟",
@@ -191,21 +196,15 @@ const questions = [
             "أن يختار طالباً واحداً للإجابة طوال النشاط."
         ],
         correct: 2,
-        explanation: "المعلم ميسر ومنظم للتعلم، ويضمن مشاركة فعالة وبيئة حوارية إيجابية."
+        explanation: "المعلم ميسر ومنظم للتعلم، ويضمن مشاركة فعالة وبيئة حوارية إيجابية.",
+        correctSound: "q5-correct.mpeg",
+        wrongSound: "q5-wrong.mpeg"
     }
 ];
 
 let currentQuestion = 0;
 let score = 0;
 let answered = false;
-
-// دالة تشغيل الأصوات الخاصة بكل سؤال (صح / خطأ)
-function playSound(isCorrect, questionIndex) {
-    let qNum = questionIndex + 1;
-    let soundFileName = isCorrect ? `q${qNum}-correct.mpeg` : `q${qNum}-wrong.mpeg`;
-    let audio = new Audio(soundFileName);
-    audio.play().catch(e => console.log("الصوت يحتاج تفاعل مستخدم:", e));
-}
 
 window.startQuiz = function() {
     currentQuestion = 0;
@@ -242,8 +241,12 @@ function checkAnswer(selected, selectedButton) {
     let allButtons = document.querySelectorAll(".answer");
     allButtons.forEach(button => { button.disabled = true; });
 
-    // تشغيل الصوت التفاعلي للإجابة
-    playSound(selected === q.correct, currentQuestion);
+    // تشغيل الصوت المخصص للسؤال الحالي (صح أو خطأ) بناءً على إجابة الطالب
+    let soundFile = (selected === q.correct) ? q.correctSound : q.wrongSound;
+    let audio = new Audio(soundFile);
+    audio.play().catch(error => {
+        console.log("تعذر تشغيل الصوت:", error);
+    });
 
     if (selected === q.correct) {
         score++;
